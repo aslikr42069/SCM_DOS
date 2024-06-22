@@ -29,5 +29,7 @@ void   lex_paren   (char * str, size_t len, size_t * pos,
                        token_t * tokens, size_t * count);
 void   lex_string  (char * str, size_t len, size_t * pos,
                        token_t * tokens, size_t * count);
+void   lex_hashtag (char * str, size_t len, size_t * pos,
+                       token_t * tokens, size_t * count);
 
 #endif
