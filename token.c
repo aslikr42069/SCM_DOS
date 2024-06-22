@@ -11,10 +11,10 @@ void  (*lex_lookup[])(char *, size_t, size_t *,
  incr_nop,  incr_nop,  incr_nop,   incr_nop, 
  incr_nop,  incr_nop,  incr_nop,   incr_nop, 
  incr_nop,  incr_nop,  incr_nop,   incr_nop, 
- incr_nop,  lex_ident, lex_string, incr_nop, 
+ incr_nop,  lex_ident, lex_string, lex_hashtag, 
  lex_ident, lex_ident, lex_ident,  incr_nop, 
- lex_paren, lex_paren, lex_ident,  incr_nop, 
- incr_nop,  incr_nop,  incr_nop,   lex_ident, 
+ lex_paren, lex_paren, lex_ident,  lex_ident, 
+ incr_nop,  lex_ident, incr_nop,   lex_ident, 
  lex_num,   lex_num,   lex_num,    lex_num, 
  lex_num,   lex_num,   lex_num,    lex_num, 
  lex_num,   lex_num,   lex_ident,  lex_comment, 
@@ -34,7 +34,7 @@ void  (*lex_lookup[])(char *, size_t, size_t *,
  lex_ident, lex_ident, lex_ident,  lex_ident, 
  lex_ident, lex_ident, lex_ident,  lex_ident, 
  lex_ident, lex_ident, lex_ident,  incr_nop, 
- incr_nop,  incr_nop,  lex_ident,  incr_nop, 
+ incr_nop,  incr_nop,  lex_ident,  incr_nop,
 };
 
 token_t * lex(char * str, size_t len){
@@ -190,3 +190,16 @@ void lex_string (char * str, size_t len, size_t * pos,
  return;
 //-----------------------------------------------
 }
+
+void lex_hashtag (char * str, size_t len, size_t * pos,
+                  token_t * tokens, size_t * count){
+//------------------------------------------------
+ tokens[(*count)].type = HASHTAG;
+ tokens[(*count)].start = *pos;
+ (*pos)++;
+ tokens[(*count)].end = *pos;
+ (*count)++;
+//------------------------------------------------
+}
+
+
