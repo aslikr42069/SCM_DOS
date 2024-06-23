@@ -6,8 +6,10 @@
 #include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 enum lex_token_types{L_PAREN, R_PAREN, IDENT,
-                     NUMB, STRING, HASHTAG, END};
+                     NUMB, STRING, HASHTAG,
+                     DEF_KEYWORD, END};
 
 typedef struct token_t{
  int8_t type;

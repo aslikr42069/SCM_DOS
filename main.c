@@ -5,7 +5,7 @@
 
 
 int main(int argc, char *argv[]){
- char * test = "; comment\n$testing$ ++- 1\n(display \"Hello, world!\")";
+ char * test = "; comment\n$testing$ ++- 1\n(define function)";
  size_t test_len = strlen(test);
  token_t * tokens = lex(test, test_len);
  free(tokens);

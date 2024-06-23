@@ -61,36 +61,15 @@ token_t * lex(char * str, size_t len){
    tokens = reallocarray(tokens, token_count, sizeof(token_t));
  }
  tokens[actual_tokens].type = END;
- printf("Tokens: \n");
- for(size_t i = 0; i < actual_tokens; i++){
-  printf("Type: ");
-  switch(tokens[i].type){
-   case IDENT:
-    printf("IDENT");
-    break;
-   case NUMB:
-    printf("NUMB");
-    break;
-   case L_PAREN:
-    printf("L_PAREN");
-    break;
-   case R_PAREN:
-    printf("R_PAREN");
-    break;
-   case HASHTAG:
-    printf("HASHTAG");
-    break;
-   case END:
-    printf("END");
-    break;
-   case STRING:
-    printf("STRING");
-    break;
+
+ for(int i = 0; i < actual_tokens; i++){
+  if(tokens[i].type == IDENT){
+   if(strncmp(&str[tokens[i].start], "define", 6) == 0){
+    tokens[i].type = DEF_KEYWORD;
+   }
   }
-  printf("\n");
-  printf("Start: %ld\n", tokens[i].start);
-  printf("End:   %ld\n", tokens[i].end);
- }
+ } 
+
  return tokens;
 }
 
