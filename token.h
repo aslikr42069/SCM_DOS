@@ -12,26 +12,26 @@ enum lex_token_types{L_PAREN, R_PAREN, IDENT,
                      DEF_KEYWORD, END};
 
 typedef struct token_t{
- int8_t type;
- size_t start;
- size_t end;
-}token_t;
+ uint8_t type;
+ uint32_t start; // MS-DOS has a max file-size of 4GB, which 32 bits can handle
+ uint32_t end;
+}token_t; // TODO: Find a way to optimize this struct size
 
-token_t * lex         (char * str, size_t len);
+token_t * lex         (char * str, uint32_t len);
 
-void   lex_ident   (char * str, size_t len, size_t * pos,
-                       token_t * tokens, size_t * count);
-void   lex_num     (char * str, size_t len, size_t * pos,
-                       token_t * tokens, size_t * count);
-void   incr_nop    (char * str, size_t len, size_t * pos,
-                       token_t * tokens, size_t * count);
-void   lex_comment (char * str, size_t len, size_t * pos,
-                       token_t * tokens, size_t * count);
-void   lex_paren   (char * str, size_t len, size_t * pos,
-                       token_t * tokens, size_t * count);
-void   lex_string  (char * str, size_t len, size_t * pos,
-                       token_t * tokens, size_t * count);
-void   lex_hashtag (char * str, size_t len, size_t * pos,
-                       token_t * tokens, size_t * count);
+void   lex_ident   (char * str, uint32_t len, uint32_t * pos,
+                       token_t * tokens, uint32_t * count);
+void   lex_num     (char * str, uint32_t len, uint32_t * pos,
+                       token_t * tokens, uint32_t * count);
+void   incr_nop    (char * str, uint32_t len, uint32_t * pos,
+                       token_t * tokens, uint32_t * count);
+void   lex_comment (char * str, uint32_t len, uint32_t * pos,
+                       token_t * tokens, uint32_t * count);
+void   lex_paren   (char * str, uint32_t len, uint32_t * pos,
+                       token_t * tokens, uint32_t * count);
+void   lex_string  (char * str, uint32_t len, uint32_t * pos,
+                       token_t * tokens, uint32_t * count);
+void   lex_hashtag (char * str, uint32_t len, uint32_t * pos,
+                       token_t * tokens, uint32_t * count);
 
 #endif

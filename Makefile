@@ -1,6 +1,6 @@
 CC     = gcc
 CFLAGS = -fuse-ld=mold -ggdb -Wpedantic -Wall -Wextra
-IN     = main.c token.c
+IN     = *.c
 OUT    = dos_scm
 
 default:

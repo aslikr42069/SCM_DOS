@@ -1,8 +1,8 @@
 #include "token.h"
 #define INIT_TOKENS 4
 
-void  (*lex_lookup[])(char *, size_t, size_t *,
-                      token_t *, size_t *) = {
+void  (*lex_lookup[])(char *, uint32_t, uint32_t *,
+                      token_t *, uint32_t *) = {
  incr_nop,  incr_nop,  incr_nop,   incr_nop, 
  incr_nop,  incr_nop,  incr_nop,   incr_nop, 
  incr_nop,  incr_nop,  incr_nop,   incr_nop, 
@@ -37,10 +37,10 @@ void  (*lex_lookup[])(char *, size_t, size_t *,
  incr_nop,  incr_nop,  lex_ident,  incr_nop,
 };
 
-token_t * lex(char * str, size_t len){
- size_t token_count   = INIT_TOKENS;
- size_t actual_tokens = 0;
- size_t pos           = 0;
+token_t * lex(char * str, uint32_t len){
+ uint32_t token_count   = INIT_TOKENS;
+ uint32_t actual_tokens = 0;
+ uint32_t pos           = 0;
  char   curr          = 0;
  token_t * tokens = calloc(INIT_TOKENS, sizeof(token_t));
  
@@ -73,8 +73,8 @@ token_t * lex(char * str, size_t len){
  return tokens;
 }
 
-void lex_ident (char * str, size_t len, size_t * pos,
-                token_t * tokens, size_t * count){
+void lex_ident (char * str, uint32_t len, uint32_t * pos,
+                token_t * tokens, uint32_t * count){
 //------------------------------------------------ 
  char curr = str[(*pos)];
  tokens[(*count)].type = IDENT;
@@ -102,8 +102,8 @@ void lex_ident (char * str, size_t len, size_t * pos,
 //------------------------------------------------
 }
 
-void lex_num (char * str, size_t len, size_t * pos,
-                token_t * tokens, size_t * count){
+void lex_num (char * str, uint32_t len, uint32_t * pos,
+                token_t * tokens, uint32_t * count){
 //----------------------------------------------
  char curr = str[(*pos)];
  tokens[(*count)].type = NUMB;
@@ -120,8 +120,8 @@ void lex_num (char * str, size_t len, size_t * pos,
 //----------------------------------------------
 }
 
-void lex_paren (char * str, size_t len, size_t * pos,
-                token_t * tokens, size_t * count){
+void lex_paren (char * str, uint32_t len, uint32_t * pos,
+                token_t * tokens, uint32_t * count){
 //----------------------------------------------
  if(str[(*pos)] == '('){
   tokens[(*count)].type = L_PAREN;
@@ -136,8 +136,8 @@ void lex_paren (char * str, size_t len, size_t * pos,
 //----------------------------------------------
 }
 
-void lex_comment (char * str, size_t len, size_t * pos,
-                  token_t * tokens, size_t * count){
+void lex_comment (char * str, uint32_t len, uint32_t * pos,
+                  token_t * tokens, uint32_t * count){
 //------------------------------------------------
  while(str[(*pos)] != '\n' && *pos < len){
   (*pos)++;
@@ -146,16 +146,16 @@ void lex_comment (char * str, size_t len, size_t * pos,
 //------------------------------------------------
 }
 
-void incr_nop (char * str, size_t len, size_t * pos,
-               token_t * tokens, size_t * count){
+void incr_nop (char * str, uint32_t len, uint32_t * pos,
+               token_t * tokens, uint32_t * count){
 //---------------------------------------------
  (*pos)++;
  return;
 //---------------------------------------------
 }
 
-void lex_string (char * str, size_t len, size_t * pos,
-                 token_t * tokens, size_t * count){
+void lex_string (char * str, uint32_t len, uint32_t * pos,
+                 token_t * tokens, uint32_t * count){
 //-----------------------------------------------
  tokens[(*count)].start = *pos;
  tokens[(*count)].type = STRING;
@@ -170,8 +170,8 @@ void lex_string (char * str, size_t len, size_t * pos,
 //-----------------------------------------------
 }
 
-void lex_hashtag (char * str, size_t len, size_t * pos,
-                  token_t * tokens, size_t * count){
+void lex_hashtag (char * str, uint32_t len, uint32_t * pos,
+                  token_t * tokens, uint32_t * count){
 //------------------------------------------------
  tokens[(*count)].type = HASHTAG;
  tokens[(*count)].start = *pos;
